@@ -1,0 +1,499 @@
+
+// .carousel .slide img {
+//     max-width: 40rem;
+//     height: auto;
+  
+    
+//   }
+
+  .carousel1{
+    position: relative;
+  }
+
+  .carousel1 .slide{
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+  }
+
+
+  .carousel1 .slide img {
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: cover;
+    border-radius: 0%;
+    
+    
+    
+  }
+
+  .container-imgPrincipal{
+
+    // background: #c0c0aa;  /* fallback for old browsers */
+    // background: -webkit-linear-gradient(to right, hsla(184, 100%, 55%, 0.87), hsla(60, 15%, 71%, 0)), url(../../img/fondo1.jpg);  /* Chrome 10-25, Safari 5.1-6 */
+    // background: linear-gradient(to right, hsla(327, 100%, 50%, 0.116), hsla(60, 15%, 71%, 0)), url(../../img/foto1.jpg); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    // background-size: cover;
+    // object-fit: cover;
+    // background-position: center;
+    // background-attachment: fixed;
+    // background-repeat: no-repeat;
+    // position: relative;
+    // width: 100%;
+    // height: 850px;
+    // margin: auto;
+    // max-width: 100vw ;
+    // max-height: 100vh;
+    // margin-bottom: 5rem;
+    // border-radius: 0% 0% 0% 1% ;
+    
+  
+  }
+  
+  .container-imgPrincipal-1{
+    // position: relative;
+    // background: #00000088;
+    // width: 100%;
+    // height: 70rem;
+    // margin: auto;
+    // position: absolute;
+    // top: 12.9%;
+    // left: 0;
+    }
+  
+  // .container-imgPrincipal img{
+  //   width: 50vw;
+  //   height: auto; 
+  //    /* border-radius: 20% 0% 20% 0% ; */
+    
+  
+    
+  // }
+  
+  .imgPrincipalModify{
+    position: absolute;
+    width: 30%;
+    top: 25%;
+    bottom: 25%;
+    left: 25%;
+    right: 25%;
+    margin: auto;
+    
+    animation: lightSpeedInLeft; 
+    animation-duration: 2s; 
+    
+  }
+
+
+  /* responsive  */
+
+
+  @media(max-width: 400.98px){
+      
+    .carousel .slide img {
+      max-width: 40rem;
+      height: auto;
+    
+      
+    }
+  
+    .carousel1 .slide{
+      position: relative;
+      max-width: 100%;
+      max-height: 100vh;
+      height: auto;
+    }
+  
+  
+    .carousel1 .slide img {
+      max-width: 100%;
+      max-height: 34vh;
+      object-fit: cover;
+      
+      
+    }
+      
+    .imgPrincipalModify{
+      position: absolute;
+      width: 49%;
+      top: 25%;
+      bottom: 25%;
+      left: 25%;
+      right: 25%;
+      margin: auto;
+      
+      animation: lightSpeedInLeft; 
+      animation-duration: 2s; 
+      
+    }
+  
+  
+   
+       
+    
+    }
+    
+    @media screen and (min-width: 401px) and (max-width: 413.98px){
+    
+  
+      .carousel .slide img {
+        max-width: 40rem;
+        height: auto;
+      
+        
+      }
+    
+      .carousel1 .slide{
+        position: relative;
+        max-width: 100%;
+        max-height: 100vh;
+        height: auto;
+      }
+    
+    
+      .carousel1 .slide img {
+        max-width: 100%;
+        max-height: 37vh;
+        object-fit: cover;
+        
+        
+      }
+    
+      
+      
+      // .container-imgPrincipal-1{
+      //   background: #00000088;
+      //   width: 100%;
+      //   height: 37%;
+      //   margin: auto;
+      //   position: absolute;
+      //   top: 37.7%;
+      //   left: 0;
+      //   }
+      
+      
+      
+      .imgPrincipalModify{
+        position: absolute;
+        width: 49%;
+        top: 30%;
+        bottom: 25%;
+        left: 25%;
+        right: 25%;
+        margin: auto;
+        
+        animation: lightSpeedInLeft; 
+        animation-duration: 2s; 
+        
+      }
+    
+     
+    
+     
+    
+      
+    
+    
+    }
+
+    @media screen and (min-width: 414px) and (max-width: 578.98px){
+    
+  
+      .carousel .slide img {
+        max-width: 40rem;
+        height: auto;
+      
+        
+      }
+    
+      .carousel1 .slide{
+        position: relative;
+        max-width: 100%;
+        max-height: 100vh;
+        height: auto;
+      }
+    
+    
+      .carousel1 .slide img {
+        max-width: 100%;
+        max-height: 34vh;
+        object-fit: cover;
+        
+        
+      }
+    
+ 
+      .imgPrincipalModify{
+        position: absolute;
+        width: 49%;
+        top: 30%;
+        bottom: 25%;
+        left: 25%;
+        right: 25%;
+        margin: auto;
+        
+        animation: lightSpeedInLeft; 
+        animation-duration: 2s; 
+        
+      }
+    
+     
+    
+     
+    
+      
+    
+    
+    }
+    
+    @media screen and (min-width: 579px) and (max-width: 812.98px){
+    
+  
+      .carousel .slide img {
+        max-width: 40rem;
+        height: auto;
+      
+        
+      }
+    
+      .carousel1 .slide{
+        position: relative;
+        max-width: 100%;
+        max-height: 100vh;
+        height: auto;
+      }
+    
+    
+      .carousel1 .slide img {
+        max-width: 100%;
+        max-height: 37vh;
+        object-fit: cover;
+        
+        
+      }
+      
+      .imgPrincipalModify{
+        position: absolute;
+        width: 49%;
+        top: 25%;
+        bottom: 25%;
+        left: 25%;
+        right: 25%;
+        margin: auto;
+        
+        animation: lightSpeedInLeft; 
+        animation-duration: 2s; 
+        
+      }
+    
+     
+    
+    
+    
+    
+    
+    
+    
+    }
+
+    @media screen and (min-width: 813px) and  (max-width: 833.98px) {
+    
+  
+      .carousel .slide img {
+        max-width: 40rem;
+        height: auto;
+      
+        
+      }
+    
+      .carousel1 .slide{
+        position: relative;
+        max-width: 100%;
+        max-height: 100vh;
+        height: auto;
+      }
+    
+    
+      .carousel1 .slide img {
+        max-width: 100%;
+        max-height: 57vh;
+        object-fit: cover;
+        
+        
+      }
+      
+      .imgPrincipalModify{
+        position: absolute;
+        width: 49%;
+        top: 25%;
+        bottom: 25%;
+        left: 25%;
+        right: 25%;
+        margin: auto;
+        
+        animation: lightSpeedInLeft; 
+        animation-duration: 2s; 
+        
+      }
+     
+     
+    
+    
+       
+      
+    }
+    
+    @media screen and (min-width: 834px) and  (max-width: 1023.98px) {
+    
+      .carousel1 .slide{
+        position: relative;
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+      }
+    
+    
+      .carousel1 .slide img {
+        max-width: 100%;
+        max-height: 47vh;
+        object-fit: cover;
+        
+        
+      }
+    
+      
+      
+      
+      
+      .imgPrincipalModify{
+        position: absolute;
+        width: 30%;
+        top: 25%;
+        bottom: 25%;
+        left: 25%;
+        right: 25%;
+        margin: auto;
+       
+        
+        animation: lightSpeedInLeft; 
+        animation-duration: 2s; 
+        
+      }
+    
+      
+  
+        
+    
+    }
+    
+    
+    
+    
+    @media screen and (min-width: 1024px) and  (max-width: 1367px) {
+          
+      .carousel1 .slide{
+        position: relative;
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+      }
+    
+    
+      .carousel1 .slide img {
+        max-width: 100%;
+        max-height: 47vh;
+        object-fit: cover;
+        
+        
+      }
+    
+    
+      
+      
+      .imgPrincipalModify{
+        position: absolute;
+        width: 30%;
+        top: 25%;
+        bottom: 25%;
+        left: 25%;
+        right: 25%;
+        margin: auto;
+       
+        
+        animation: lightSpeedInLeft; 
+        animation-duration: 2s; 
+        
+      }
+    
+      
+      
+      
+     
+     
+     
+    
+    }  
+    
+    
+    
+    @media screen and (min-width: 1112px) and  (max-width: 1380.99px) {
+    
+    
+     
+    
+      .carousel1 .slide{
+        position: relative;
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+      }
+    
+    
+      .carousel1 .slide img {
+        max-width: 100%;
+        max-height: 90vh;
+        object-fit: cover;
+        
+        
+      }
+    
+      
+      
+      // .container-imgPrincipal-1{
+      //   background: #00000088;
+      //   width: 100%;
+      //   height: 56rem;
+      //   margin: auto;
+      //   position: absolute;
+      //   top: 15.7%;
+      //   left: 0;
+      //   }
+      
+      
+      
+      .imgPrincipalModify{
+        position: absolute;
+        width: 30%;
+        top: 25%;
+        bottom: 25%;
+        left: 25%;
+        right: 25%;
+        margin: auto;
+       
+        
+        animation: lightSpeedInLeft; 
+        animation-duration: 2s; 
+        
+      }
+    
+      
+      
+     
+      
+    }  
+       
+      
+  
+
+
+  
+  
