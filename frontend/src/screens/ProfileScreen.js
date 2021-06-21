@@ -1,123 +1,108 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { detailsUser, updateUserProfile } from '../actions/userActions'
-import { LoadingBox } from '../components/LoadingBox'
-import { MessageBox } from '../components/MessageBox'
-import { USER_UPDATE_PROFILE_RESET } from '../contants/userConstants'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { detailsUser, updateUserProfile } from '../actions/userActions';
+import { LoadingBox } from '../components/LoadingBox';
+import { MessageBox } from '../components/MessageBox';
+import { USER_UPDATE_PROFILE_RESET } from '../contants/userConstants';
 
 export const ProfileScreen = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    
-   
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
-    const userSignin = useSelector(state => state.userSignin)
-    const { userInfo } = userSignin
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, user } = userDetails;
 
-    const userDetails = useSelector(state => state.userDetails)
-    const { loading, error, user } = userDetails
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success: SuccessUpdate, error: errorUpdate, loading: loadingUpdate } = userUpdateProfile;
 
-    const userUpdateProfile = useSelector(state => state.userUpdateProfile)
-    const { success: SuccessUpdate, error: errorUpdate, loading: loadingUpdate } = userUpdateProfile
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+  useEffect(() => {
+    if (!user) {
+      dispatch({ type: USER_UPDATE_PROFILE_RESET });
+      dispatch(detailsUser(userInfo._id));
+    } else {
+      setName(user.name);
+      setEmail(user.email);
+    }
+  }, [dispatch, userInfo._id, user]);
 
-    useEffect(() => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert('Las contraseñas deben ser iguales');
+    } else {
+      dispatch(updateUserProfile({ userId: user._id, name, email, password }));
+    }
+  };
 
-        if(!user){
-            dispatch({type: USER_UPDATE_PROFILE_RESET});
-            dispatch(detailsUser(userInfo._id));
+  return (
+    <div>
+      <form className="form" onSubmit={submitHandler}>
+        <h1>Perfil Usuario</h1>
+        {loading ? (
+          <LoadingBox></LoadingBox>
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <>
+            {loadingUpdate && <LoadingBox></LoadingBox>}
+            {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
+            {SuccessUpdate && <MessageBox variant="success">Perfil actualizado!</MessageBox>}
 
-        } else {
-            setName(user.name);
-            setEmail(user.email);
+            <div>
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Ingresar nombre"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Ingresar email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Ingresar password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="ConfirmPassword">Confirmar Password</label>
+              <input
+                type="Password"
+                id="password"
+                placeholder="confirmar password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
 
-         
-        }
-     
-    }, [dispatch, userInfo._id, user]);
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        if( password !== confirmPassword ){
-            alert('Las contraseñas deben ser iguales')
-        }else{
-            dispatch(updateUserProfile({ userId: user._id, name, email, password}));
-        }
-    };
-
-
-    return (
-        <div>
-            <form className="form" onSubmit={submitHandler}>
-                
-                <h1>
-                    Perfil Usuario
-                </h1>
-                {
-                    loading ? (
-                    <LoadingBox></LoadingBox>
-                    ):
-                    error ? (
-                    <MessageBox variant="danger">{error}</MessageBox>
-                    ) : (
-                    <>
-                    
-                        {loadingUpdate && <LoadingBox></LoadingBox>}
-                        {errorUpdate && (<MessageBox variant="danger">{errorUpdate}</MessageBox>)}
-                        {SuccessUpdate && (<MessageBox variant="success">Perfil actualizado!</MessageBox>)}
-                    
-                    <div>
-                        <label htmlFor="name">Name</label>
-                        <input
-                         type="text"
-                         id="name"
-                         placeholder="Ingresar nombre"
-                         value={name}
-                         onChange = {(e) => setName(e.target.value)}
-                         />
-                    </div>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <input
-                         type="email"
-                         id="email"
-                         placeholder="Ingresar email"
-                         value={email}
-                         onChange = {(e) => setEmail(e.target.value)}
-                         />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input
-                         type="password"
-                         id="password"
-                         placeholder="Ingresar password"
-                         onChange = {(e) => setPassword(e.target.value)}
-                         />
-                    </div>
-                    <div>
-                        <label htmlFor="ConfirmPassword">Confirmar Password</label>
-                        <input
-                         type="Password"
-                         id="password"
-                         placeholder="confirmar password"
-                         onChange = {(e) => setConfirmPassword(e.target.value)}
-                         />
-                    </div>
-                   
-                    
-                    <div>
-                        <label/>
-                        <button className="primary" type="submit">Actualizar</button>
-                    </div>
-                    </>
-                )}
-                
-            </form>
-        </div>
-    )
-}
+            <div>
+              <label />
+              <button className="primary" type="submit">
+                Actualizar
+              </button>
+            </div>
+          </>
+        )}
+      </form>
+    </div>
+  );
+};

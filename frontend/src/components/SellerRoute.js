@@ -1,28 +1,21 @@
-import React from 'react'
-import { Route, Redirect } from "react-router-dom";
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-export const SellerRoute = ({component: Component, ...rest}) => {
+export const SellerRoute = ({ component: Component, ...rest }) => {
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
-
-    const userSignin = useSelector(state => state.userSignin);
-    const { userInfo } = userSignin;
-
-    return (
-        
-        <Route
-            {...rest}
-            render={(props) =>
-                 userInfo && userInfo.isSeller ? ( 
-                  <Component {...props}></Component>
-                  
-                ) : (
-                
-                  <Redirect to="/signin" />
-                )
-            }
-     
-        ></Route>
-   
-    )
-}
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        userInfo && userInfo.isSeller ? (
+          <Component {...props}></Component>
+        ) : (
+          <Redirect to="/signin" />
+        )
+      }
+    ></Route>
+  );
+};

@@ -1,2 +1,4 @@
 # .env
 # /uploads/*.jpg
+# dependencies
+/node_modules

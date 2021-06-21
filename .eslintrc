@@ -1,0 +1,73 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier", "prettier/react", "plugin:jsx-a11y/recommended"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "rules": {
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "no-param-reassign": 0,
+    "no-console": 0,
+    "no-debugger": 0,
+    "no-plusplus": 0,
+    "max-len": 0,
+    "no-const-assign": 1,
+    "no-this-before-super": 1,
+    "no-undef": 1,
+    "no-unreachable": 1,
+    "no-unused-vars": 1,
+    "constructor-super": 1,
+    "valid-typeof": 1,
+    "no-nested-ternary": 0,
+    "no-underscore-dangle": 0,
+    "react/jsx-child-element-spacing": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/require-extension": 0,
+    "react/jsx-filename-extension": 0,
+    "arrow-body-style": 0,
+    "prefer-arrow-callback": 0,
+    "func-names": 0,
+    "react/forbid-prop-types": 0,
+    "jsx-a11y/href-no-hash": 0,
+    "jsx-a11y/anchor-is-valid": [
+      1,
+      {
+        "aspects": ["invalidHref"]
+      }
+    ],
+    "react/destructuring-assignment": 0,
+    "camelcase": 0,
+    "import/no-unresolved": 0,
+    "import/extensions": 0,
+    "global-require": 0,
+    "react/no-did-mount-set-state": 1,
+    "import/no-named-as-default": 0
+  },
+  "overrides": [
+    {
+      "files": ["*.test.js", "**/*.test.js"],
+      "env": {
+        "jest": true,
+        "node": true
+      },
+      "rules": {
+        "no-unused-expressions": 0
+      }
+    }
+  ],
+  "plugins": ["jsx-a11y"],
+  "globals": {
+    "Sentry": true
+  }
+}

@@ -1,138 +1,140 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
-import { createProduct, deleteProduct, listProducts } from '../actions/productActions'
-import { LoadingBox } from '../components/LoadingBox'
-import { MessageBox } from '../components/MessageBox'
-import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../contants/productConstants'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { createProduct, deleteProduct, listProducts } from '../actions/productActions';
+import { LoadingBox } from '../components/LoadingBox';
+import { MessageBox } from '../components/MessageBox';
+import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../contants/productConstants';
 
-export const ProductListScreen = ( props ) => {
+export const ProductListScreen = (props) => {
+  const { pageNumber = 1 } = useParams();
 
-    const {  pageNumber= 1 } = useParams();
+  const sellerMode = props.match.path.indexOf('/seller') >= 0;
 
-    const sellerMode = props.match.path.indexOf('/seller') >= 0;
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products, page, pages } = productList;
 
-    const productList = useSelector(state => state.productList)
-    const {loading, error, products, page, pages} = productList
+  console.log(productList);
 
-    console.log(productList)
+  const productCreate = useSelector((state) => state.productCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate;
 
-    const productCreate = useSelector(state => state.productCreate)
-    const{ loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct } = productCreate;
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+  const productDelete = useSelector((state) => state.productDelete);
+  const { loading: loadingDelete, success: successDelete, error: errorDelete } = productDelete;
 
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
-    const productDelete = useSelector(state => state.productDelete);
-    const {loading: loadingDelete, success: successDelete, error: errorDelete, } = productDelete;
-
-    
-    const userSignin = useSelector(state => state.userSignin);
-    const { userInfo } = userSignin;
-
-    useEffect(() => {
-
-        if(successCreate){
-            dispatch({ type: PRODUCT_CREATE_RESET});
-            props.history.push(`/product/${createdProduct._id}/edit`);
-        }
-        
-      
-       if(successDelete){
-           dispatch({ type: PRODUCT_DELETE_RESET });
-       }
-
-       dispatch(listProducts({seller: sellerMode ? userInfo._id : '', pageNumber}));
-
-    }, [createdProduct, dispatch, props.history, sellerMode, successCreate, successDelete, userInfo._id, pageNumber]);
-
-
-    
-
-    const deleteHandler = (product) =>{
-
-        if(window.confirm('quieres borrar este producto?')){
-
-            dispatch(deleteProduct(product._id));
-
-        }
-           
-       
-
+  useEffect(() => {
+    if (successCreate) {
+      dispatch({ type: PRODUCT_CREATE_RESET });
+      props.history.push(`/product/${createdProduct._id}/edit`);
     }
 
-    const createHandler = () =>{
-
-        dispatch(createProduct())
-
+    if (successDelete) {
+      dispatch({ type: PRODUCT_DELETE_RESET });
     }
 
+    dispatch(listProducts({ seller: sellerMode ? userInfo._id : '', pageNumber }));
+  }, [
+    createdProduct,
+    dispatch,
+    props.history,
+    sellerMode,
+    successCreate,
+    successDelete,
+    userInfo._id,
+    pageNumber,
+  ]);
 
+  const deleteHandler = (product) => {
+    if (window.confirm('quieres borrar este producto?')) {
+      dispatch(deleteProduct(product._id));
+    }
+  };
 
-    return (
-        <div>
-            <div className="row">
-               <h1>Productos</h1>
-               <button className="primary" type="button" onClick={createHandler}>
-                   Crear Productos
-                </button>
-            </div>
-            {loadingDelete && <LoadingBox></LoadingBox>}
-            {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
+  const createHandler = () => {
+    dispatch(createProduct());
+  };
 
-            {loadingCreate && <LoadingBox></LoadingBox>}
-            {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
+  return (
+    <div>
+      <div className="row">
+        <h1>Productos</h1>
+        <button className="primary" type="button" onClick={createHandler}>
+          Crear Productos
+        </button>
+      </div>
+      {loadingDelete && <LoadingBox></LoadingBox>}
+      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
 
-            {
-            loading? <LoadingBox></LoadingBox>
-             :
-            error? <MessageBox variant="danger">{error}</MessageBox>
-             :
-             <>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>NAME</th>
-                        <th>PRECIO</th>
-                        <th>CATEGORIA</th>
-                        <th>MARCA</th>
-                        <th>EJECUTAR</th>
-                    </tr>
-                </thead>
+      {loadingCreate && <LoadingBox></LoadingBox>}
+      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
 
-                <tbody>
-                    {products.map((product) => (
+      {loading ? (
+        <LoadingBox></LoadingBox>
+      ) : error ? (
+        <MessageBox variant="danger">{error}</MessageBox>
+      ) : (
+        <>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PRECIO</th>
+                <th>CATEGORIA</th>
+                <th>MARCA</th>
+                <th>EJECUTAR</th>
+              </tr>
+            </thead>
 
-                        <tr key={product._id}>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product._id}>
+                  <td>{product._id}</td>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.category}</td>
+                  <td>{product.brand}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="small"
+                      onClick={() => props.history.push(`/product/${product._id}/edit`)}
+                    >
+                      Editar
+                    </button>
 
-                            <td>{product._id}</td>
-                            <td>{product.name}</td>
-                            <td>{product.price}</td>
-                            <td>{product.category}</td>
-                            <td>{product.brand}</td>
-                            <td>
-                                <button type="button" className="small" onClick={()=> props.history.push(`/product/${product._id}/edit`)}>Editar</button>
-                           
-                                <button type="button" className="small" onClick={()=>  deleteHandler(product)}>Borrar</button>
-                            </td>
+                    <button type="button" className="small" onClick={() => deleteHandler(product)}>
+                      Borrar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <div className="row center pagination">
-                {
-                    [...Array(pages).keys()].map(x => (
-                        <Link className={x+1 === page? 'active' : ''} key={x+1} to={`/productlist/pageNumber/${x + 1}`}>
-                            {x+1}
-                        </Link>
-                    ))
-                }
-            </div>
-            </>
-            }
-        </div>
-    )
-}
+          <div className="row center pagination">
+            {[...Array(pages).keys()].map((x) => (
+              <Link
+                className={x + 1 === page ? 'active' : ''}
+                key={x + 1}
+                to={`/productlist/pageNumber/${x + 1}`}
+              >
+                {x + 1}
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
